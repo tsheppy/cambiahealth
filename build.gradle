@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id 'com.palantir.docker' version '0.20.1'
+    id 'com.github.johnrengelman.shadow' version '2.0.4'
+}
+
+group 'sheppy.tucker'
+version '0.1-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+}
+
+docker {
+    name "dockerhub.com/cambiahealth:$version"
+    buildArgs (['http_proxy': System.getenv('http_proxy'), 'https_proxy': System.getenv('https_proxy')])
+    files shadowJar.outputs
+}
+
+shadowJar {
+    baseName = project.name
+    classifier = null
+    version = null
+}
