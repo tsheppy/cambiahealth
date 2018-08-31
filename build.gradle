@@ -15,12 +15,25 @@ repositories {
 }
 
 dependencies {
+    testCompile 'io.cucumber:cucumber-java:3.0.2'
+    testCompile 'io.cucumber:cucumber-junit:3.0.2'
     testCompile 'junit:junit:4.12'
 }
 
+test {
+    useJUnitPlatform()
+}
+
+jar {
+    manifest {
+        attributes(
+                "Main-Class": "com.example.Main"
+        )
+    }
+}
+
 docker {
-    name "dockerhub.com/cambiahealth:$version"
-    buildArgs (['http_proxy': System.getenv('http_proxy'), 'https_proxy': System.getenv('https_proxy')])
+    name "tsheppy/cambiahealth:$version"
     files shadowJar.outputs
 }
 
@@ -28,4 +41,15 @@ shadowJar {
     baseName = project.name
     classifier = null
     version = null
+}
+
+task cucumber(dependsOn: testClasses) {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "cucumber.api.cli.Main"
+            classpath = configurations.testRuntimeClasspath + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--glue', 'gradle.cucumber', 'src/test/resources']
+        }
+    }
 }

@@ -4,4 +4,4 @@ VOLUME /workdir
 COPY . /usr/src/cambihealth/
 
 WORKDIR /workdir
-CMD ["java", "/usr/src/cambiahealth/cambiahealth.jar"]
+CMD ["java", "-jar", "/usr/src/cambiahealth/cambiahealth.jar"]
