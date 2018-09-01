@@ -23,6 +23,7 @@ jobs:
 
     steps:
     - checkout
+    - setup_remote_docker
 
     # Download and cache dependencies
     - restore_cache:
@@ -39,4 +40,4 @@ jobs:
         key: v1-dependencies-{{ checksum "build.gradle" }}
 
     # run tests!
-    - run: gradle test
+    - run: gradle

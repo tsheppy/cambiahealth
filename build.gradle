@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'sheppy.tucker'
-version '0.1'
+version '1.1'
 
 sourceCompatibility = 1.8
 
@@ -49,20 +49,7 @@ task copySamples(type: Copy) {
     into 'build/test/samples/'
 }
 
-task cucumber(dependsOn: [testClasses, 'docker', 'copySamples']) {
-    dependsOn assemble, compileTestJava
-    doLast {
-        javaexec {
-            main = "cucumber.api.cli.Main"
-            classpath = configurations.testRuntimeClasspath + sourceSets.main.output + sourceSets.test.output
-            args = ['--plugin', 'pretty', '--glue', 'gradle.cucumber', 'src/test/resources']
-            jvmArgs = ["-DdockerImage=${docker.name}", "-DdockerWorkingDir=${copySamples.destinationDir}"]
-        }
-    }
-}
-test {
-    jvmArgs = ["-DdockerImage=${docker.name}", "-DdockerWorkingDir=${copySamples.destinationDir}"]
-}
+test.dependsOn 'docker'
+test.dependsOn 'copySamples'
 
-
-defaultTasks 'cucumber'
+defaultTasks 'build'
