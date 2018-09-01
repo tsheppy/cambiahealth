@@ -45,14 +45,19 @@ shadowJar {
     version = null
 }
 
-task cucumber(dependsOn: testClasses) {
+task copySamples(type: Copy) {
+    from 'src/test/resources/samples/'
+    into 'build/test/samples/'
+}
+
+task cucumber(dependsOn: [testClasses, 'docker', 'copySamples']) {
     dependsOn assemble, compileTestJava
     doLast {
         javaexec {
             main = "cucumber.api.cli.Main"
             classpath = configurations.testRuntimeClasspath + sourceSets.main.output + sourceSets.test.output
             args = ['--plugin', 'pretty', '--glue', 'gradle.cucumber', 'src/test/resources']
-            jvmArgs = ["-DdockerImage=${docker.name}"]
+            jvmArgs = ["-DdockerImage=${docker.name}", "-DdockerWorkingDir=${copySamples.destinationDir}"]
         }
     }
 }
