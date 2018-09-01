@@ -1,36 +1,29 @@
 package com.example;
 
-import java.io.File;
-import java.io.IOException;
 import java.nio.charset.Charset;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class CsvSorter {
-    private static final String ENV_INPUT_FILE = "CSV_INPUT_FILE";
     private static final String FILE_DIRECTORY = "/work/";
-    private static final String SORTED_FILE_EXTENSION = "_sorted";
+    private static final Path inputFilePath = Paths.get(FILE_DIRECTORY + "input.csv");
+    private static final Path outputFilePath = Paths.get(FILE_DIRECTORY + "output.csv");
 
     public static void main(String[] args) {
-        Path inputPath = null;
 
-        if (System.getenv(ENV_INPUT_FILE) == null){
-            System.out.println(ENV_INPUT_FILE + " must specify a valid input filename");
-            System.exit(1);
-        }
-        try {
-            inputPath = Paths.get(FILE_DIRECTORY + File.separator + System.getenv(ENV_INPUT_FILE));
-        } catch (Exception e) {
-            System.out.println(ENV_INPUT_FILE + " must specify a valid input filename");
+        if (!Files.exists(inputFilePath)){
+            System.out.println(inputFilePath + " must be present");
             System.exit(1);
         }
 
-        Path outputPath = formatOutputFilePath(inputPath);
         try {
-            List<String> sortedEntries = sortCsvEntries(Files.readAllLines(inputPath, Charset.defaultCharset()));
-            writeEntriesToFile(sortedEntries, outputPath);
+            List<String> sortedEntries = sortCsvEntries(Files.readAllLines(inputFilePath, Charset.defaultCharset()));
+            Files.write(outputFilePath, sortedEntries, StandardOpenOption.CREATE);
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
@@ -45,17 +38,5 @@ public class CsvSorter {
             sortedList.add(String.join(",", entries));
         }
         return sortedList;
-    }
-
-    public static void writeEntriesToFile(List<String> csvLines, Path path) throws IOException {
-        Files.write(path, csvLines, StandardOpenOption.CREATE);
-    }
-
-    public static Path formatOutputFilePath(Path inputPath) {
-        int position = inputPath.toString().lastIndexOf('.');
-        if (position > 0) {
-            return Paths.get(new StringBuilder(inputPath.toString()).insert(position, SORTED_FILE_EXTENSION).toString());
-        }
-        return Paths.get(inputPath.toString() + SORTED_FILE_EXTENSION);
     }
 }

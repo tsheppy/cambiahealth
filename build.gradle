@@ -22,10 +22,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-test {
-    useJUnitPlatform()
-}
-
 jar {
     manifest {
         attributes(
@@ -64,3 +60,9 @@ task cucumber(dependsOn: [testClasses, 'docker', 'copySamples']) {
         }
     }
 }
+test {
+    jvmArgs = ["-DdockerImage=${docker.name}", "-DdockerWorkingDir=${copySamples.destinationDir}"]
+}
+
+
+defaultTasks 'cucumber'
