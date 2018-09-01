@@ -1,3 +1,4 @@
+@NotCircleCiCompatible
 Feature: CSV parser runs as docker container
 
   Scenario: Parsing given input files writes expected output files
