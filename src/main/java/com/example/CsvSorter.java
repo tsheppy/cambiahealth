@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class CsvSorter {
@@ -34,7 +35,7 @@ public class CsvSorter {
         List<String> sortedList = new ArrayList<>();
         for (String line : lines) {
             String[] entries = line.split(",");
-            Arrays.sort(entries);
+            Arrays.sort(entries, Collections.reverseOrder());
             sortedList.add(String.join(",", entries));
         }
         return sortedList;
