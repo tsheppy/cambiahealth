@@ -2,35 +2,35 @@
 
 This is the Git repo for the [Cambia Health SDET position](https://careers-cambiahealth.icims.com/jobs/24078/lead-test-and-software-engineer-%28sdet%29/job) being applied for by myself [(Tucker Sheppy)](https://www.linkedin.com/in/tucker-sheppy/).  
 
-# Programming Portion
+# Programming
 
 I addressed the programming section of this interview by creating a Docker project using Java and Gradle for builds.  This is the first truly open-source project I have worked on, so it was a great chance to learn what tools are available to the open-source community.
 
 ## Building the application
+
 Run `./gradlew` to build and test the application.
 
 ## Sort CSV file contents using the Docker container
+
 ``docker run --rm -v /my/path/to/csv:/work tsheppy/cambiahealth:0.1-SNAPSHOT`` 
 This will start a new container and look for a CSV file in the _/my/path/to/csv/_ directory.  Upon completion, a file named _output.csv_ will be created in the same directory with the contents of _input.csv_ but sorted within each row.
 
-## Why Gradle? 
-I chose to use Gradle to build the project for a few reasons.
- * I am familiar with it  :)
- * Cross-platform build compatibility since I have been using Windows at home and work
- * Ease of implementation and extension
+# Gherkin
 
-## And the Gherkin Tests?
-Tests use the Cucumber framework with the _.feature_ files written in Gherkin.  Tests are directed at both a unit-test level (sorting.feature) as well as a service-level (dockerExecution.feature).  If this were in production, I'd recommend replacing the sorting.feature with just JUnit tests unless significant interaction is expected from the PO regarding that behavior.  The use of data tables in the tests was done as a learning exercise and would need additional work to scale out and support a larger collection of matching input/output CSV files.  Although step definitions were not required, I enjoyed the challenge.  
+1. __Write Gherkin tests for program__
+    
+    Tests use the Cucumber framework with the _.feature_ files written in Gherkin.  Tests are directed at both a unit-test level (sorting.feature) as well as a service-level (dockerExecution.feature).  If this were in production, I'd recommend replacing the sorting.feature with just JUnit tests unless significant interaction is expected from the PO regarding that behavior.  The use of data tables in the tests was done as a learning exercise and would need additional work to scale out and support a larger collection of matching input/output CSV files.  Although step definitions were not required, I enjoyed the challenge.  
 
-Tests such as these can provide the following benefits:
+2. __Explain in detail why they might be helpful in the future__
+    
+    Tests such as these can provide the following benefits:
 
-* Act as a safety net for future refactoring efforts
-* Provide clarity for the expected behavior of the system in a readable manner by less-technical stakeholders
-* Provide metrics to help inform development and release activities
+    * Act as a safety net for future refactoring efforts
+    * Provide clarity for the expected behavior of the system in a readable manner by less-technical stakeholders
+    * Provide metrics to help inform development and release activities
 
-# Question / Answers
+# Tools
 
-## Tools
 1. __What's helpful about version control systems?  What's annoying about them?__
 
     Version Control Systems are critical whenever there is a need to coordinate work on shared source code.  They (generally) provide a way to track history, provide access to source code, and manage conflicts between developers working on the same code.  Without them, we'd be stuck back in the days of distributing code back and forth via floppy disk or email.  Both methods are extremely fragile.
@@ -57,7 +57,8 @@ Tests such as these can provide the following benefits:
     I chose to use Gradle to build the project because I am familiar with it, it provides cross-platform build compatibility, and its ease of implementation and extension.        
 
 # Testing Methodology
-1.  What's the right role for QA in the software development process?
+
+1.  __What's the right role for QA in the software development process?__
     
     I believe the right role for QA within a development process is whatever it takes to deliver a product that meets the organization's and customers' expectations.  There is a range of roles and environments for QA, and I believe that there is no single role.  Just a _right_ role for __your__ organization and application.  
     
@@ -65,7 +66,7 @@ Tests such as these can provide the following benefits:
     
     Within a modern agile software process, the QA role might be embedded with the development team and focused on developing functional and *ility tests at the same time as the developers.  Depending upon organization culture, the role might not even write tests and would just focus on building test frameworks, providing training, gather and report metrics, and otherwise enabling core development teams to implement their own tests.
     
-2.  As a QA person, you have two weeks to prepare before development begins, what do you do?
+2.  __As a QA person, you have two weeks to prepare before development begins, what do you do?__
 
     To prepare for a project as it begins, I'd try to accomplish as many of the below objectives as time allows.
     * Understand the program's objective and the value we're trying to deliver to the customer
@@ -76,7 +77,7 @@ Tests such as these can provide the following benefits:
     * Build up QA product backlog as appropriate  
     * Establish quality metrics and reporting mechanism with all stakeholders if not done already
     
-3.  When is it appropriate to use automated testing?  When manual?
+3.  __When is it appropriate to use automated testing?  When manual?__
 
     In general I prefer to use automated testing whenever possible, but there are situations when manual testing may be more appropriate.  Some of those situations are described below.
     * Exploratory testing
@@ -85,7 +86,7 @@ Tests such as these can provide the following benefits:
     * A feature can't easily be tested (the cost outweighs the benefit)
     * Usability and related non-functional tests
     
-4. I'm in charge of integration testing for new features.  Where to focus testing efforts?  How to decide what not to test?
+4. __I'm in charge of integration testing for new features.  Where to focus testing efforts?  How to decide what not to test?__
 
     As the QA role is largely about understanding the risk of a project, I'd focus first on the riskiest areas as outlined below.
     * Functionality that exercises the integration between multiple components that was not covered by unit tests
