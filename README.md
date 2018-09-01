@@ -12,7 +12,7 @@ Run `./gradlew` to build and test the application.
 
 ## Sort CSV file contents using the Docker container
 
-``docker run --rm -v /my/path/to/csv:/work tsheppy/cambiahealth:0.1-SNAPSHOT`` 
+``docker run --rm -v /my/path/to/csv:/work tsheppy/cambiahealth:1.0`` 
 This will start a new container and look for a CSV file in the _/my/path/to/csv/_ directory.  Upon completion, a file named _output.csv_ will be created in the same directory with the contents of _input.csv_ but sorted within each row.
 
 # Gherkin
@@ -35,7 +35,7 @@ This will start a new container and look for a CSV file in the _/my/path/to/csv/
 
     Version Control Systems are critical whenever there is a need to coordinate work on shared source code.  They (generally) provide a way to track history, provide access to source code, and manage conflicts between developers working on the same code.  Without them, we'd be stuck back in the days of distributing code back and forth via floppy disk or email.  Both methods are extremely fragile.
 
-    As version control systems are just tools, I don't generally find anything annoying about them.  If chosen and used correctly, they can greatly enhance development teams' productivity.
+    As version control systems are just tools, I don't generally find anything annoying about them.  If chosen and used correctly, they can greatly enhance development teams' productivity.        
 
 2. __What are pros and cons of using Docker to develop, test, and deploy Software?__
 
@@ -64,7 +64,7 @@ This will start a new container and look for a CSV file in the _/my/path/to/csv/
     
     For example, if a product were being developed for a highly regulated industry such as health care or spaceflight there may be a need for dedicated QA teams that focus solely on QA and work against a documented set of requirements.  
     
-    Within a modern agile software process, the QA role might be embedded with the development team and focused on developing functional and *ility tests at the same time as the developers.  Depending upon organization culture, the role might not even write tests and would just focus on building test frameworks, providing training, gather and report metrics, and otherwise enabling core development teams to implement their own tests.
+    Within a modern agile software process, the QA role might be embedded with the development team and focused on developing functional and *ility tests at the same time as the developers.  Depending upon organization culture, the role might only focus on building test frameworks, providing training, gather and report metrics, and otherwise enabling core development teams to deliver a quality product.
     
 2.  __As a QA person, you have two weeks to prepare before development begins, what do you do?__
 
