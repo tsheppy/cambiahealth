@@ -64,5 +64,7 @@ test {
     jvmArgs = ["-DdockerImage=${docker.name}", "-DdockerWorkingDir=${copySamples.destinationDir}"]
 }
 
+test.dependsOn 'docker'
+test.dependsOn 'copySamples'
 
 defaultTasks 'cucumber'
