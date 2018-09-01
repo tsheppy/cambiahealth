@@ -1,0 +1,68 @@
+import java.text.SimpleDateFormat
+
+plugins {
+    id 'java'
+    id 'com.palantir.docker' version '0.20.1'
+    id 'com.github.johnrengelman.shadow' version '2.0.4'
+}
+
+group 'sheppy.tucker'
+version '0.1'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    testCompile 'io.cucumber:cucumber-java:3.0.2'
+    testCompile 'io.cucumber:cucumber-junit:3.0.2'
+    testCompile 'junit:junit:4.12'
+}
+
+jar {
+    manifest {
+        attributes(
+                "Implementation-Title": project.name,
+                "Implementation-Version": version,
+                "Main-Class": "com.example.CsvSorter"
+        )
+    }
+}
+
+docker {
+    name "tsheppy/cambiahealth:$version"
+    files shadowJar.outputs
+    buildArgs([VERSION: "$version", BUILD_DATE: "${new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX").format(new Date())}"])
+}
+
+shadowJar {
+    baseName = project.name
+    classifier = null
+    version = null
+}
+
+task copySamples(type: Copy) {
+    from 'src/test/resources/samples/'
+    into 'build/test/samples/'
+}
+
+task cucumber(dependsOn: [testClasses, 'docker', 'copySamples']) {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "cucumber.api.cli.Main"
+            classpath = configurations.testRuntimeClasspath + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--glue', 'gradle.cucumber', 'src/test/resources']
+            jvmArgs = ["-DdockerImage=${docker.name}", "-DdockerWorkingDir=${copySamples.destinationDir}"]
+        }
+    }
+}
+test {
+    jvmArgs = ["-DdockerImage=${docker.name}", "-DdockerWorkingDir=${copySamples.destinationDir}"]
+}
+
+
+defaultTasks 'cucumber'
