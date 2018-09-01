@@ -9,27 +9,26 @@ import java.util.List;
 
 public class CsvSorter {
     private static final String ENV_INPUT_FILE = "CSV_INPUT_FILE";
-    private static final String ENV_OUTPUT_FILE = "CSV_OUTPUT_FILE";
+    private static final String INPUT_DIRECTORY = "/input/";
+    private static final String OUTPUT_DIRECTORY = "/output/";
 
     public static void main(String[] args) {
         Path inputPath = null;
-        Path outputPath = null;
-        try {
-            inputPath = Paths.get(System.getenv(ENV_INPUT_FILE));
-        } catch (Exception e) {
-            System.out.println(ENV_INPUT_FILE + " must specify a valid input file path");
+        if (System.getenv(ENV_INPUT_FILE) == null){
+            System.out.println(ENV_INPUT_FILE + " must specify a valid input filename");
             System.exit(1);
         }
         try {
-            outputPath = Paths.get(System.getenv(ENV_OUTPUT_FILE));
+            inputPath = Paths.get(INPUT_DIRECTORY + System.getenv(ENV_INPUT_FILE));
         } catch (Exception e) {
-            System.out.println(ENV_OUTPUT_FILE + " must specify a valid output file path");
+            System.out.println(ENV_INPUT_FILE + " must specify a valid input filename");
             System.exit(1);
         }
 
+        String outputFileName = System.getenv(OUTPUT_DIRECTORY + System.getenv(ENV_INPUT_FILE));
         try {
             List<String> sortedEntries = sortCsvEntries(Files.readAllLines(inputPath, Charset.defaultCharset()));
-            writeEntriesToFile(sortedEntries, outputPath);
+            writeEntriesToFile(sortedEntries, Paths.get(outputFileName));
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
