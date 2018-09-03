@@ -1,5 +1,6 @@
 # https://github.com/tsheppy/cambiahealth/
-[![CircleCI](https://circleci.com/gh/tsheppy/cambiahealth/tree/feature%2Fcircle-ci.svg?style=svg)](https://circleci.com/gh/tsheppy/cambiahealth/tree/feature%2Fcircle-ci)
+[![CircleCI](https://circleci.com/gh/tsheppy/cambiahealth/tree/master.svg?style=svg)](https://circleci.com/gh/tsheppy/cambiahealth/tree/master)
+[![Build Status](https://travis-ci.org/tsheppy/cambiahealth.svg?branch=feature%2Ftravis-ci)](https://travis-ci.org/tsheppy/cambiahealth)
 
 This is the Git repo for the [Cambia Health SDET position](https://careers-cambiahealth.icims.com/jobs/24078/lead-test-and-software-engineer-%28sdet%29/job) being applied for by myself [(Tucker Sheppy)](https://www.linkedin.com/in/tucker-sheppy/).  
 
