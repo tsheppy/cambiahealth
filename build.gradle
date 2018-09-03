@@ -69,7 +69,7 @@ checkstyle {
 
 jacocoTestReport {
     reports {
-        xml.enabled true
+        xml.enabled false
         html.enabled true
         html.destination file("${buildDir}/reports/jacoco")
     }
