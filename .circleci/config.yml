@@ -39,7 +39,7 @@ jobs:
         - ~/.gradle
         key: v1-dependencies-{{ checksum "build.gradle" }}
 
-    - run: ./gradlew pmd
+    - run: ./gradlew pmdMain
     - store_test_results:
         path: build/reports/pmd/
     - store_artifacts:
