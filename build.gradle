@@ -6,6 +6,9 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '2.0.4'
 }
 
+apply plugin: 'checkstyle'
+apply plugin: 'pmd'
+
 group 'sheppy.tucker'
 version '1.2'
 
@@ -53,6 +56,11 @@ test.dependsOn 'docker'
 test.dependsOn 'copySamples'
 test {
     jvmArgs(["-DdockerWorkingDir=${copySamples.destinationDir}", "-DdockerImage=${docker.name}"])
+}
+
+checkstyle {
+    toolVersion = '8.12'
+    sourceSets = [project.sourceSets.main]
 }
 
 defaultTasks 'build'
