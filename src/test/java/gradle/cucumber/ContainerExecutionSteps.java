@@ -1,6 +1,5 @@
 package gradle.cucumber;
 
-import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -30,6 +29,7 @@ public class ContainerExecutionSteps {
         String dockerCommand = "docker run --rm "
                 + "-v " + workingDir + ":/work" + " "
                 + dockerImage;
+        System.out.println(dockerCommand);
         Runtime runtime = Runtime.getRuntime();
         Process process = runtime.exec(dockerCommand);
         process.waitFor();

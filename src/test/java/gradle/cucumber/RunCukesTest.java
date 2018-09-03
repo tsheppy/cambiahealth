@@ -6,8 +6,8 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        plugin = {"pretty"},
-        tags = {"~@NotCircleCiCompatible"})
+        plugin = {"pretty", "junit:build/reports/cucumber.xml"},
+        tags = {"not @NotCircleCiCompatible"})
 public class RunCukesTest {
 
 }
