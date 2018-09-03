@@ -51,5 +51,8 @@ task copySamples(type: Copy) {
 
 test.dependsOn 'docker'
 test.dependsOn 'copySamples'
+test {
+    jvmArgs(["-DdockerWorkingDir=${copySamples.destinationDir}", "-DdockerImage=${docker.name}"])
+}
 
 defaultTasks 'build'
