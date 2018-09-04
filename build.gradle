@@ -2,13 +2,14 @@ import java.text.SimpleDateFormat
 
 plugins {
     id 'java'
+    id 'jacoco'
     id 'com.palantir.docker' version '0.20.1'
     id 'com.github.johnrengelman.shadow' version '2.0.4'
+    id 'com.github.kt3k.coveralls' version '2.6.3'
 }
 
 apply plugin: 'checkstyle'
 apply plugin: 'pmd'
-apply plugin: 'jacoco'
 
 group 'sheppy.tucker'
 version '1.3'
@@ -69,7 +70,7 @@ checkstyle {
 
 jacocoTestReport {
     reports {
-        xml.enabled false
+        xml.enabled true
         html.enabled true
         html.destination file("${buildDir}/reports/jacoco")
     }
