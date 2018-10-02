@@ -4,7 +4,7 @@
 [![codecov](https://codecov.io/gh/tsheppy/cambiahealth/branch/master/graph/badge.svg)](https://codecov.io/gh/tsheppy/cambiahealth)
 [![Waffle.io - Columns and their card count](https://badge.waffle.io/tsheppy/cambiahealth.svg?columns=all)](https://waffle.io/tsheppy/cambiahealth)
 
-This is the Git repo for the [Cambia Health SDET position](https://careers-cambiahealth.icims.com/jobs/24078/lead-test-and-software-engineer-%28sdet%29/job) being applied for by myself [(Tucker Sheppy)](https://www.linkedin.com/in/tucker-sheppy/).  
+This is the repository for the [Cambia Health SDET position](https://careers-cambiahealth.icims.com/jobs/24078/lead-test-and-software-engineer-%28sdet%29/job) being applied for by myself [(Tucker Sheppy)](https://www.linkedin.com/in/tucker-sheppy/).  
 
 # Programming
 
